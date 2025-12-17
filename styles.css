@@ -1,0 +1,344 @@
+body {
+    
+    background-image: url("wallpaper2.jpeg");
+    background-size: cover; /* Ensures the image fills the area */
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    /* Important: Ensure they take the full available width */
+    width: 100%; 
+    /* This prevents horizontal scrolling unless content demands it */
+    margin: 0; 
+    padding: 0;
+}
+
+#main-layout-wrapper {
+    display: flex; /* Activate Flexbox */
+    flex-direction: column; /* Stack children vertically (Wall on top, Controls on bottom) */
+    align-items: center; 
+    width: 100%; 
+    padding-top: 20px;
+    padding-bottom: 30px; 
+}
+
+#communication-wall {
+    
+    
+    background-size: cover; /* Ensures the image fills the area */
+    background-repeat: no-repeat;
+    position: relative;
+    width: 50vw; 
+    min-height: 70vh;
+    border: 7px hidden #000; 
+    padding: 50px;
+    
+}
+
+
+/* --- SECTION: Controls Styling --- */
+
+/* 1. Layout for the new main wrapper */
+#controls-container {
+
+    margin-top: 20px;
+    /* Use flex to align the two boxes side-by-side */
+    display: flex; 
+    gap: 20px; /* Space between the Input Box and the Send Button Box */
+}
+
+/* 2. Styling for the separate control boxes */
+.control-box {
+
+    padding: 20px; /* This padding creates the separate space around the element */
+    background-color: #000; /* Dark background color for the box */
+    border: 2px solid #780606; /* The border around the box */
+}
+
+/* 3. Styling the specific elements inside the boxes */
+
+#message-input {
+    
+    width: 300px; /* Set a specific width for the input field */
+    padding: 10px;
+    margin-bottom: 100;
+    font-size: 1.2em;
+    font-family: monospace;
+    background-color: #8B0000; 
+    color: white; 
+    border: 2px solid #550000; 
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); 
+}
+
+#send-button {
+    
+    width: 100%;
+    /* Keep button styling */
+    padding: 10px;
+    margin-bottom: 100;
+    font-size: 1.2em;
+    font-family: monospace;
+    background-color: #8B0000; 
+    color: white;
+    border: 2px solid #550000; 
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+#send-button:hover {
+
+    cursor: pointer;
+    background-color: #A52A2A; /* Slightly lighter red on hover */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Enhance the glow */
+}
+
+/* Styling for the Upside Down Toggle Button */
+#upside-down-toggle {
+    
+    padding: 10px 15px; 
+    font-size: 1.2em;
+    font-family: monospace;
+    
+    background-color: #8B0000; 
+    color: white; 
+    border: 2px solid #550000; 
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Slight red shadow */
+    cursor: pointer;
+    z-index: 1000; /* Ensure it stays on top of everything */
+
+    /* Key for Positioning: */
+    position: absolute; /* Positions it relative to the closest positioned ancestor (usually <body>) */
+    top: 60px;          /* 60 pixels down from the top edge */
+    right: 20px;        /* 20 pixels left from the right edge */
+}
+
+/* Add a hover effect for better usability */
+#upside-down-toggle:hover {
+    background-color: #A52A2A; 
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+
+/*----------------------------------------------------------*/
+
+/* --- Light Unit and Bulb Styling --- */
+
+/* ADD THIS BLOCK to your styles.css, ideally near the top with other core styles */
+@keyframes flicker-chaos {
+    0% { opacity: 0.8; }
+    5% { opacity: 0.2; }
+    10% { opacity: 0.9; }
+    15% { opacity: 0.1; }
+    25% { opacity: 1.0; }
+    30% { opacity: 0.3; }
+    40% { opacity: 0.8; }
+    50% { opacity: 0.2; }
+    70% { opacity: 0.9; }
+    100% { opacity: 1.0; }
+}
+
+/* The outer container for absolute positioning */
+.light-unit {
+    position: absolute; /* Allows precise placement over the image */
+    width: 25px;       /* Width of the final bulb shape */
+    height: 40px;      /* Height of the final bulb shape */
+    /* Rotate for the diamond/oval look */
+    transform: rotate(45deg); 
+    z-index: 10;
+}
+
+
+
+/* The actual element that glows */
+.light-bulb {
+    width: 100%;
+    height: 100%;
+    /* Use a rounded rectangle/oval shape */
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+     /*ADD BACKGROUND COLOR OF BULB HERE Dim when off */
+     /* FIX: Add a very faint background color so the element is there, 
+       but nearly transparent. This is better than a comment/placeholder. */
+    background-color: rgba(0, 0, 0, 0.01);
+    /* Ensure the transform property on the .light-unit is not inherited for the flicker */
+    transform: rotate(-45deg); 
+    box-shadow: inset 0 0 5px rgb(120, 95, 58); 
+}
+
+/* --- Positioning of Individual Bulbs --- */
+
+#unit-A { top: 57px; left: 176px;  transform: rotate(63deg);}/*yellow*/
+#unit-B { top: 54px; left: 265px; }
+#unit-C { top: 55px; left: 334px; }
+#unit-D { top: 70px; left: 425px; }
+#unit-E { top: 70px; left: 500px; }
+#unit-F { top: 82px; left: 603px; }
+#unit-G { top: 67px; left: 665px;  transform: rotate(15deg);}
+#unit-H { top: 62px; left: 755px; transform: rotate(-5deg);}
+
+/* --- Temporary Placeholder Positioning for I to Z (Find and Replace) --- */
+/*
+    These values are designed to ensure every bulb is visible and separate.
+    YOU MUST REPLACE THESE WITH THE FINAL, PRECISE TOP/LEFT VALUES LATER.
+*/
+
+/* Row I-Q: Temporary Positioning */
+#unit-I { top: 177px; left: 77px; transform: rotate(65deg);} 
+#unit-J { top: 205px; left: 195px; } 
+#unit-K { top: 220px; left: 260px;} 
+#unit-L { top: 225px; left: 345px; } 
+#unit-M { top: 227px; left: 440px; transform: rotate(30deg);} 
+#unit-N { top: 195px; left: 500px; } 
+#unit-O { top: 185px; left: 600px; } 
+#unit-P { top: 180px; left: 655px; } 
+#unit-Q { top: 200px; left: 815px; transform: rotate(55deg);} 
+
+/* Row R-Z: Temporary Positioning */
+#unit-R { top: 340px; left: 130px; transform: rotate(60deg);} 
+#unit-S { top: 357px; left: 235px; } 
+#unit-T { top: 380px; left: 290px; } 
+#unit-U { top: 370px; left: 395px; } 
+#unit-V { top: 370px; left: 463px; } 
+#unit-W { top: 353px; left: 526px; } 
+#unit-X { top: 356px; left: 600px; } 
+#unit-Y { top: 345px; left: 667px; transform: rotate(60deg);} 
+#unit-Z { top: 349px; left: 827px; transform: rotate(15deg);}
+
+/* --- COMPLETED COLOR DEFINITIONS FOR ALL BULBS --- */
+
+/* 1. OFF State Definitions (Faint Color) */
+.light-unit.color-red .light-bulb { background-color: rgba(255, 255, 0, 0.1); }
+.light-unit.color-blue .light-bulb { background-color: rgba(255, 255, 0, 0.1); }
+.light-unit.color-green .light-bulb { background-color: rgba(255, 255, 0, 0.1); }
+.light-unit.color-yellow .light-bulb { background-color: rgba(255, 255, 0, 0.1); }
+.light-unit.color-pink .light-bulb { background-color: rgba(255, 255, 0, 0.1); }
+
+/* 2. LIT State Definitions (NUCLEAR BRIGHTNESS) */
+
+.light-bulb.lit {
+    /* Set the core to blinding white */
+    background: #FFFFFF; 
+    
+    /* EXTREME BOOSTS: */
+    /* 1. Brightness: Multiplies brightness by 200% */
+    /* 2. Saturation: Forces the color to be hyper-vivid, making the glow stronger */
+    filter: brightness(2.0) saturate(3.0); 
+    
+    /* GLOBAL WHITE SHADOW: This provides the primary "blinding" effect */
+    box-shadow: 0 0 15px 8px rgba(255, 255, 255, 0.9);
+    
+    /* Animation remains */
+    animation: flicker-chaos 0.5s infinite alternate steps(1); 
+}
+
+/* Color-Specific Glow Layers - Replace ALL color blocks with these */
+
+.light-bulb.lit.color-red {
+    /* Uses the color red to create a massive external shadow effect */
+    filter: drop-shadow(0 0 100px #FF0000) drop-shadow(0 0 200px rgba(255, 0, 0, 0.6));
+}
+
+.light-bulb.lit.color-blue {
+    filter: drop-shadow(0 0 100px #0000FF) drop-shadow(0 0 200px rgba(0, 0, 255, 0.6));
+}
+
+.light-bulb.lit.color-green {
+    filter: drop-shadow(0 0 100px #00FF00) drop-shadow(0 0 200px rgba(0, 255, 0, 0.6));
+}
+
+.light-bulb.lit.color-yellow {
+    filter: drop-shadow(0 0 100px #FFFF00) drop-shadow(0 0 200px rgba(255, 255, 0, 0.6));
+}
+
+.light-bulb.lit.color-pink {
+    filter: drop-shadow(0 0 100px #FF69B4) drop-shadow(0 0 200px rgba(255, 105, 180, 0.6)); 
+}
+
+
+/* === A. Global Upside Down Theme on the Wrapper === */
+
+/* === Upside Down Mode: Realistic Background Implementation === */
+
+#main-layout-wrapper.upside-down-active {
+    /* 1. Add your background image here */
+    background-image: url('upsidedown.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* 2. Full screen coverage */
+    min-height: 100vh;
+    width: 100%;
+    
+    /* 3. Eerie Atmosphere */
+    filter: saturate(0.7) brightness(0.8);
+    transition: all 0.5s ease-in-out;
+}
+
+/* 4. Remove the "Communication Wall" container visuals */
+.upside-down-active #communication-wall {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    
+    /* Use relative positioning so bulbs inside can be positioned absolutely */
+    position: relative; 
+    height: 80vh; /* Adjust based on your image size */
+}
+
+/* 5. Style the bulbs to be "invisible" until they light up */
+
+/* === Upside Down Fiery Red Flash === */
+
+/* This targets EVERY light-bulb that is LIT while inside the Upside Down wrapper */
+.upside-down-active .light-bulb.lit {
+    /* 1. The Core Color: A bright, hot orange-red */
+    background-color: #ff2a00 !important;
+    
+    /* 2. The Spooky Glow Layers:
+       Layer 1: Internal hot white-red glow
+       Layer 2: Bright red core glow
+       Layer 3: Large, misty blood-red aura
+       Layer 4: Faint distant red haze */
+    box-shadow: 
+        inset 0 0 12px #6a0505,
+        0 0 20px 5px #ff0000, 
+        0 0 40px 15px #b30000,
+        0 0 80px 30px rgba(139, 0, 0, 0.6) !important;
+
+    /* 3. Add a slight flicker animation for extra spookiness */
+    animation: fieryFlicker 0.15s infinite alternate;
+}
+
+/* Optional: Adding a vibrating/unstable flicker effect */
+@keyframes fieryFlicker {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.8; transform: scale(1.05); filter: blur(1px); }
+}
+
+/* Ensure the specific color classes from normal mode are overridden */
+.upside-down-active .color-red .light-bulb.lit,
+.upside-down-active .color-blue .light-bulb.lit,
+.upside-down-active .color-green .light-bulb.lit,
+.upside-down-active .color-yellow .light-bulb.lit,
+.upside-down-active .color-pink .light-bulb.lit {
+    background-color: #ff2a00 !important;
+}
+/* ========================================================== */
+/* === UPSIDE DOWN MODE: "OFF" STATE BULB STYLING === */
+/* ========================================================== */
+
+/* Target light bulbs that are NOT lit while in Upside Down mode */
+.upside-down-active .light-bulb:not(.lit) {
+    /* 1. Change the background to a dark, dead grey/black */
+    background-color: rgba(20, 20, 20, 0.673) !important;
+
+    /* 2. REPLACE the brownish outline with a deep black "socket" shadow */
+    /* We use !important to ensure it overrides the normal mode's inset shadow */
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 1), /* Deep internal darkness */
+        0 0 2px rgba(0, 0, 0, 0.593) !important; /* Subtle dark outer rim */
+    
+    /* Optional: Add a subtle dark border to define the shape against the background */
+    border: 1px solid #220000 !important;
+}

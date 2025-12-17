@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Upside Down</title>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Permanent Upside Down Styling */
+        body {
+            background-image: url('upsidedown.jpeg'); /* Make sure you have this image */
+            background-size: cover;
+            background-position: center;
+            background-color: #050000;
+            color: #ff0000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            
+            /* THE FLIP */
+            transform: rotate(180deg);
+            filter: saturate(0.8) brightness(0.7);
+        }
+
+        h1 {
+            text-shadow: 0 0 10px red, 0 0 20px #800;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        #controls-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .control-box {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #8b0000;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+
+        #message-input {
+            width: 300px;
+            padding: 15px;
+            font-size: 1.5rem;
+            background-color: #300000;
+            color: white;
+            border: 2px solid #ff0000;
+            text-align: center;
+            outline: none;
+        }
+
+        #send-button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.5rem;
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        #send-button:hover {
+            background-color: #ff0000;
+            box-shadow: 0 0 20px red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="controls-container">
+        <h1>SEND MESSAGE</h1>
+        
+        <div class="control-box">
+            <input type="text" id="message-input" placeholder="TYPE HERE..." autofocus>
+        </div>
+        
+        <div class="control-box">
+            <button id="send-button">SEND</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
