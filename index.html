@@ -1,149 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will, Are You There?</title>
-    <link rel="stylesheet" href="styles.css">
-
+    <title>The Void</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        body { background: black; color: #a00; height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Courier New', monospace; overflow: hidden; }
+        #text-container { font-size: 3rem; text-align: center; opacity: 0; transition: opacity 2s; text-shadow: 0 0 15px red; }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 10; }
+        button { padding: 20px 40px; font-size: 1.5rem; background: transparent; color: red; border: 2px solid red; cursor: pointer; transition: 0.2s; }
+        button:hover { background: red; color: black; box-shadow: 0 0 20px red; }
+    </style>
 </head>
-
 <body>
-    
-    <div id="main-layout-wrapper">
-        <button id="upside-down-toggle">Flip to Upside Down</button>
+    <div id="overlay"><button id="btn">ENTER IF YOU DARE</button></div>
+    <div id="text-container">...</div>
 
-        <div id="communication-wall">
+    <script>
+        const socket = io();
+        const btn = document.getElementById('btn');
+        const overlay = document.getElementById('overlay');
+        const textEl = document.getElementById('text-container');
 
-    <div class="light-unit color-yellow" id="unit-A">
-        <div class="light-bulb" id="light-A"></div>
-    </div>
+        // 1. USER CLICKS BUTTON
+        btn.addEventListener('click', () => {
+            // Hide the overlay
+            overlay.style.display = 'none';
+            
+            // TELL SERVER WE ARE READY
+            console.log("Button clicked. Waking Vecna...");
+            socket.emit('wake_vecna');
+        });
 
-    <div class="light-unit color-red" id="unit-B">
-        <div class="light-bulb" id="light-B"></div>
-    </div>
+        // 2. SERVER RESPONDS WITH SCARE
+        socket.on('scare_event', (data) => {
+            console.log("Scare received");
+            
+            // Show Text
+            textEl.innerText = data.text;
+            textEl.style.opacity = 1;
 
-    <div class="light-unit color-blue" id="unit-C">
-        <div class="light-bulb" id="light-C"></div>
-    </div>
+            if (data.audio) {
+                const audio = new Audio("data:audio/mp3;base64," + data.audio);
+                
+                // 💀 DEMON SETTINGS
+                audio.playbackRate = 0.65; 
+                audio.preservesPitch = false; 
+                if (audio.mozPreservesPitch !== undefined) audio.mozPreservesPitch = false;
+                if (audio.webkitPreservesPitch !== undefined) audio.webkitPreservesPitch = false;
 
-    <div class="light-unit color-red" id="unit-D">
-        <div class="light-bulb" id="light-D"></div>
-    </div>
-
-    <div class="light-unit color-green" id="unit-E">
-        <div class="light-bulb" id="light-E"></div>
-    </div>
-
-    <div class="light-unit color-yellow" id="unit-F">
-        <div class="light-bulb" id="light-F"></div>
-    </div>
-
-    <div class="light-unit color-red" id="unit-G">
-        <div class="light-bulb" id="light-G"></div>
-    </div>
-
-    <div class="light-unit color-blue" id="unit-H">
-        <div class="light-bulb" id="light-H"></div>
-    </div>
-
-    <div class="light-unit color-red" id="unit-I">
-        <div class="light-bulb" id="light-I"></div>
-    </div>
-
-    <div class="light-unit color-yellow" id="unit-J">
-        <div class="light-bulb" id="light-J"></div>
-    </div>
-
-    <div class="light-unit color-green" id="unit-K">
-        <div class="light-bulb" id="light-K"></div>
-    </div>
-
-    <div class="light-unit color-pink" id="unit-L">
-        <div class="light-bulb" id="light-L"></div>
-    </div>
-
-    <div class="light-unit color-blue" id="unit-M">
-        <div class="light-bulb" id="light-M"></div>
-    </div>
-
-    <div class="light-unit color-red" id="unit-N">
-        <div class="light-bulb" id="light-N"></div>
-    </div>
-
-    <div class="light-unit color-yellow" id="unit-O">
-        <div class="light-bulb" id="light-O"></div>
-    </div>
-
-    <div class="light-unit color-green" id="unit-P">
-        <div class="light-bulb" id="light-P"></div>
-    </div>
-
-    <div class="light-unit color-pink" id="unit-Q">
-        <div class="light-bulb" id="light-Q"></div>
-    </div>
-
-    <div class="light-unit color-blue" id="unit-R">
-        <div class="light-bulb" id="light-R"></div>
-    </div>
-
-    <div class="light-unit color-pink" id="unit-S">
-        <div class="light-bulb" id="light-S"></div>
-    </div>
-
-    <div class="light-unit color-green" id="unit-T">
-        <div class="light-bulb" id="light-T"></div>
-    </div>
-
-    <div class="light-unit color-yellow" id="unit-U">
-        <div class="light-bulb" id="light-U"></div>
-    </div>
-
-    <div class="light-unit color-red" id="unit-V">
-        <div class="light-bulb" id="light-V"></div>
-    </div>
-
-    <div class="light-unit color-blue" id="unit-W">
-        <div class="light-bulb" id="light-W"></div>
-    </div>
-
-    <div class="light-unit color-pink" id="unit-X">
-        <div class="light-bulb" id="light-X"></div>
-    </div>
-
-    <div class="light-unit color-green" id="unit-Y">
-        <div class="light-bulb" id="light-Y"></div>
-    </div>
-
-    <div class="light-unit color-yellow" id="unit-Z">
-        <div class="light-bulb" id="light-Z"></div>
-    </div>
-
-        </div>
-
-        <div id="controls-container">
-             <div class="control-box" id="input-console">
-             <input type="text" id="message-input" placeholder="Type your message here...">
-             </div>                            
-
-             <div class="control-box" id="send-console">
-             <button id="send-button">Send to the Wall</button>
-             </div>
-        </div>
-    </div>
-    
-    <script src="script.js"></script>
-
-    <audio id="ambient-hum-audio" loop preload="auto">
-    <source src="electricity-humming.mp3" type="audio/mpeg">
-    Your browser does not support the audio element for the ambient hum.
-</audio>
-
-<audio id="static-flash-audio" preload="auto">
-    <source src="electric-static.mp3" type="audio/mpeg">
-    Your browser does not support the audio element for the static flash.
-</audio>
-
+                audio.play().catch(e => console.error("Audio blocked:", e));
+            }
+        });
+    </script>
 </body>
+</html>
