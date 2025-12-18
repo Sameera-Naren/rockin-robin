@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Upside Down</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="upside-down-mode">
+
+    <div class="control-box">
+        <h1 style="text-shadow: 0 0 10px red;">SEND MESSAGE</h1>
+        <input type="text" id="message-input" placeholder="TYPE HERE..." autofocus>
+        <br>
+        <button id="send-button">SEND</button>
+        <div id="status" style="margin-top:20px; color:yellow;"></div>
+    </div>
+
+    <script>
+        const socket = io();
+        const input = document.getElementById('message-input');
+        const status = document.getElementById('status');
+
+        function sendMessage() {
+            // Remove spaces and make uppercase so "code red" or "codered" works
+            let rawText = input.value.trim().toUpperCase(); 
+            let cleanText = rawText.replace(/\s/g, ''); 
+
+            if (cleanText === "CODERED") {
+                console.log("🚨 TRIGGERING VECNA...");
+                socket.emit('code_red_trigger');
+                status.innerText = "🚨 CODE RED INITIATED 🚨";
+                document.body.style.background = "red";
+            } else {
+                console.log("Sending:", rawText);
+                socket.emit('typing_event', { text: rawText });
+                status.innerText = "Sent: " + rawText;
+            }
+            input.value = "";
+        }
+
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
